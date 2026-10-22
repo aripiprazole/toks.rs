@@ -1,0 +1,21 @@
+[package]
+name = "toks"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Rust bindings for toks: exact tokenizer ids, as fast as the hardware allows"
+license = "Apache-2.0"
+repository = "https://github.com/actual-computer/toks"
+keywords = ["tokenizer", "bpe", "ffi", "llm"]
+categories = ["api-bindings", "text-processing"]
+links = "toks"
+build = "build.rs"
+include = [
+    "/build.rs",
+    "/src/**",
+    "/tests/**",
+    "/examples/**",
+    "/vendor/toks/**",
+]
+
+[dependencies]
