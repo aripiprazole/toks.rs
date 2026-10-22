@@ -15,7 +15,14 @@ include = [
     "/src/**",
     "/tests/**",
     "/examples/**",
-    "/vendor/toks/**",
+    # the submodule's library sources only (it also holds tests, docs and the python package)
+    "/vendor/toks/include/**",
+    "/vendor/toks/src/**",
+    "/vendor/toks/Makefile",
+    "/vendor/toks/LICENSE",
+    "/vendor/toks/NOTICE",
+    "/vendor/toks/LICENSING.md",
+    "/vendor/toks/THIRD_PARTY_NOTICES.md",
 ]
 
 [dependencies]

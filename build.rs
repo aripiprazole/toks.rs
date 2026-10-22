@@ -1,5 +1,7 @@
 //! Builds the C library with its own Makefile (as upstream's python/setup.py does) and links it statically.
 //!
+//! vendor/toks is a git submodule (`git submodule update --init` after cloning).
+//!
 //!   TOKS_SRC_DIR=<toks checkout>   build that tree instead of vendor/toks
 //!   TOKS_LIB_DIR=<dir>             link a prebuilt libtoks.a from <dir>; nothing is built
 //!   CC / AR                        passed through to make (the Makefile defaults to clang)
@@ -21,7 +23,10 @@ fn main() {
         let manifest = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
         let src = env::var_os("TOKS_SRC_DIR").map_or_else(|| manifest.join("vendor/toks"), PathBuf::from);
         if !src.join("include/toks.h").is_file() {
-            panic!("toks: no include/toks.h under {} (set TOKS_SRC_DIR or TOKS_LIB_DIR)", src.display());
+            panic!(
+                "toks: no include/toks.h under {} (run `git submodule update --init`, or set TOKS_SRC_DIR or TOKS_LIB_DIR)",
+                src.display()
+            );
         }
         for path in ["include", "src", "Makefile"] {
             println!("cargo:rerun-if-changed={}", src.join(path).display());
